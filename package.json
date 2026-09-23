@@ -1,0 +1,10 @@
+{
+  "name": "cinerate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CineRate MERN movie rating and review application",
+  "scripts": {
+    "client": "npm --prefix client run dev",
+    "server": "npm --prefix server run dev"
+  }
+}
