@@ -1,63 +1,38 @@
 require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
-
 const connectDB = require("../config/db");
 const User = require("../models/User");
 
 const createAdmin = async () => {
   try {
-    await connectDB();
+    const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+    const password = process.env.ADMIN_PASSWORD;
 
-    const email = "admin@cinerate.com";
-    const password = "Admin@123";
-
-    const existingUser = await User.findOne({
-      email
-    });
-
-    if (existingUser) {
-      existingUser.role = "admin";
-
-      const passwordHash = await bcrypt.hash(
-        password,
-        12
-      );
-
-      existingUser.password = passwordHash;
-
-      await existingUser.save();
-
-      console.log("✅ Existing user promoted to admin");
-      console.log(`Email: ${email}`);
-      console.log(`Password: ${password}`);
-
-      process.exit(0);
+    if (!email || !password || password.length < 12) {
+      throw new Error("Set ADMIN_EMAIL and ADMIN_PASSWORD (at least 12 characters) in server/.env");
     }
 
-    const hashedPassword = await bcrypt.hash(
-      password,
-      12
-    );
+    await connectDB();
+    const user = await User.findOne({ email });
 
-    const admin = await User.create({
-      username: "admin",
-      email,
-      password: hashedPassword,
-      role: "admin"
-    });
-
-    console.log("✅ Admin created successfully");
-    console.log(`Email: ${admin.email}`);
-    console.log(`Password: ${password}`);
+    if (user) {
+      user.role = "admin";
+      await user.save();
+      console.log(`Promoted ${email} to admin; existing password was kept.`);
+    } else {
+      await User.create({
+        username: (email.split("@")[0].replace(/[^a-z0-9_]/gi, "_").slice(0, 30) || "admin").padEnd(3, "_"),
+        email,
+        password: await bcrypt.hash(password, 12),
+        role: "admin"
+      });
+      console.log(`Admin created: ${email}`);
+    }
 
     process.exit(0);
   } catch (error) {
-    console.error(
-      "❌ Failed to create admin:",
-      error.message
-    );
-
+    console.error("Failed to create admin:", error.message);
     process.exit(1);
   }
 };

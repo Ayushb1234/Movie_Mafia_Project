@@ -2,12 +2,14 @@ require("dotenv").config();
 
 const app = require("./app");
 const connectDB = require("./config/db");
+const seedCatalog = require("./utils/seedCatalog");
 
 const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
   try {
     await connectDB();
+    await seedCatalog();
 
     app.listen(PORT, () => {
       console.log(`🚀 CineRate API running on http://localhost:${PORT}`);
