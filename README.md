@@ -14,3 +14,5 @@ Movie catalog with user reviews and ratings.
 The administrator can add, edit, and delete movies from the Admin Dashboard. Anyone can browse movies; signed-in users can post one review per movie, including a 1–5 star rating and comment. Register a normal user account from the website to review movies.
 
 To point the client at a non-local API, set `VITE_API_URL` in `client/.env` (for example, `https://your-api.example/api`).
+
+Further deails soon added
