@@ -15,4 +15,5 @@ The administrator can add, edit, and delete movies from the Admin Dashboard. Any
 
 To point the client at a non-local API, set `VITE_API_URL` in `client/.env` (for example, `https://your-api.example/api`).
 
-Further deails soon added
+Further deails soon added 
+soon
