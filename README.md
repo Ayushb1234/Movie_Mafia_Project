@@ -17,3 +17,11 @@ To point the client at a non-local API, set `VITE_API_URL` in `client/.env` (for
 
 Further deails soon added 
 soon
+
+
+Deployments:
+------------
+
+1. Backend (Render) : https://movie-mafia-project.onrender.com/
+
+2. Frontend (Vercel) : 
