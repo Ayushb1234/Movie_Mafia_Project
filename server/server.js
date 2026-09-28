@@ -23,26 +23,51 @@
 // startServer();
 
 
+// require("dotenv").config();
+
+// const app = require("./app");
+// const connectDB = require("./config/db");
+// const seedCatalog = require("./utils/seedCatalog");
+
+// const PORT = process.env.PORT || 5000;
+
+// const startServer = async () => {
+//   try {
+//     // Connect to MongoDB
+//     await connectDB();
+
+//     // Seed movie/catalog data
+//     await seedCatalog();
+
+//     // Start Express server
+//     app.listen(PORT, () => {
+//       console.log(
+//         `🚀 CineRate API running on port ${PORT}`
+//       );
+//     });
+//   } catch (error) {
+//     console.error(
+//       "Server startup failed:",
+//       error.message
+//     );
+
+//     process.exit(1);
+
+
 require("dotenv").config();
 
 const app = require("./app");
 const connectDB = require("./config/db");
-const seedCatalog = require("./utils/seedCatalog");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 
 const startServer = async () => {
   try {
-    // Connect to MongoDB
     await connectDB();
 
-    // Seed movie/catalog data
-    await seedCatalog();
-
-    // Start Express server
-    app.listen(PORT, () => {
+    app.listen(PORT, "0.0.0.0", () => {
       console.log(
-        `🚀 CineRate API running on port ${PORT}`
+        `🚀 CineRate API running on 0.0.0.0:${PORT}`
       );
     });
   } catch (error) {
@@ -52,6 +77,10 @@ const startServer = async () => {
     );
 
     process.exit(1);
+  }
+};
+
+startServer();
   }
 };
 
