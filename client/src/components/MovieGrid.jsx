@@ -40,14 +40,9 @@ const MovieGrid = ({
 
   return (
     <div className="movie-grid">
-      {movies.map(
-        (movie) => (
-          <MovieCard
-            key={movie._id}
-            movie={movie}
-          />
-        )
-      )}
+      {movies.map((movie, index) => (
+        <MovieCard key={movie._id} movie={movie} index={index} />
+      ))}
     </div>
   );
 };
