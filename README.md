@@ -24,4 +24,4 @@ Deployments:
 
 1. Backend (Render) : https://movie-mafia-project.onrender.com/
 
-2. Frontend (Vercel) : 
+2. Frontend (Vercel) :  https://movie-mafia-project.vercel.app/
